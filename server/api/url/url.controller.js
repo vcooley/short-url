@@ -14,7 +14,7 @@ var getNextSequence = function(name) {
 };
 
 exports.createUrl = function(req, res) {
-  console.log('tried to create url')
+  console.log('tried to create url');
   getNextSequence('urlNumber')
     .then(function(number) {
       console.log(number);
@@ -29,7 +29,7 @@ exports.createUrl = function(req, res) {
 };
 
 exports.retrieveUrl = function(req, res) {
-  console.log('tried to retrieve url')
+  console.log('tried to retrieve url');
   Url
     .findById(req.params.shortUrl)
     .then(function(err, doc) {
