@@ -6,7 +6,7 @@ var validator = require('validator');
 
 var getNextSequence = function(name) {
   return Counter.find({name: name}, function(err, docs) {
-      if(err) { throw err; }
+      if (err) { handleError(res, err); }
       return docs[0].update({ $inc: {seq: 1} }, null, function(err, doc) {
         if (err) {
           throw err;
@@ -34,8 +34,8 @@ exports.createUrl = function(req, res) {
                : true)
       });
       url.save(function(err, doc) {
-        if (err) { throw err; }
-        return res.json(doc);
+        if (err) { handleError(res, err); }
+      return res.json(doc);
       })
     })
   ;
@@ -44,7 +44,7 @@ exports.createUrl = function(req, res) {
 exports.retrieveUrl = function(req, res) {
   Url
     .findById(req.params.shortUrl, function(err, doc) {
-      if (err) { throw err; }
+      if (err) { handleError(res, err); }
       if (!doc) {
         return res.status(404).end('Not found.')
       }
@@ -56,3 +56,7 @@ exports.retrieveUrl = function(req, res) {
       }
     })
 };
+
+function handleError(res, err) {
+  return res.status(500).send(err);
+}
