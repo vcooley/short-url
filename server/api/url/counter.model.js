@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var CounterSchema = new Schema({
-  _id: String,
+  name: String,
   seq: {type: Number, default: 0}
 });
 

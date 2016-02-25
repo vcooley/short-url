@@ -1,5 +1,5 @@
 {
-  "name": "header-parser",
+  "name": "short-url",
   "version": "0.0.1",
   "main": "server/app.js",
   "engines": {
@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "express": "^4.13.4",
-    "mongoose": "^4.4.4"
+    "mongoose": "^4.4.4",
+    "validator": "^5.0.0"
   },
   "private": true
 }
