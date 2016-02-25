@@ -20,34 +20,39 @@ exports.createUrl = function(req, res) {
   getNextSequence('urlNumber')
     .then(function(counterDocs) {
       var number = counterDocs[0].seq;
-      if(validator.isUrl(req.params.longUrl) || req.params.invalid){
-        Url.create({
-          _id: number,
-          url: req.params.longUrl
-        }, function(err, doc) {
-          if (err) { throw err; }
-          res.json(doc);
-        })
+      // If the url is not valid and the allowInvalid parameter has not been
+      // passed, return a 400 error.
+      console.log(req.query.allowInvalid);
+      if(!validator.isURL(req.params.longUrl) && !req.query.allowInvalid) {
+        return  res.status(400).end('Invalid Url');
       }
-      else {
-        res.statusCode(400).send('Invalid Url')
-      }
-    });
+      var url = new Url({
+        _id: number,
+        url: req.params.longUrl,
+        valid: (req.query.allowInvalid
+               ? false
+               : true)
+      });
+      url.save(function(err, doc) {
+        if (err) { throw err; }
+        return res.json(doc);
+      })
+    })
+  ;
 };
 
 exports.retrieveUrl = function(req, res) {
-  console.log('tried to retrieve url');
   Url
     .findById(req.params.shortUrl, function(err, doc) {
       if (err) { throw err; }
-      if (!doc.valid) {
-        res.end(doc.url);
+      if (!doc) {
+        return res.status(404).end('Not found.')
       }
-      else if(validator.isUrl(doc.url)) {
-        res.redirect(doc.url);
+      if(validator.isURL(doc.url)) {
+        return res.redirect(doc.url);
       }
       else {
-        res.redirect('http://' + doc.url);
+        return res.end(doc.url);
       }
     })
 };

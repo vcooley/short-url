@@ -23,6 +23,3 @@ server.listen(config.port, function() {
   console.log('Server listening on port %d', config.port);
 });
 
-server.listen(config.port, function() {
-  console.log('Server listening on port %d', config.port);
-});
