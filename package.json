@@ -6,12 +6,18 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node server/app.js"
+    "start": "node server/app.js",
+    "test": "node test.js"
   },
   "dependencies": {
     "express": "^4.13.4",
+    "lodash": "^4.5.1",
     "mongoose": "^4.4.4",
     "validator": "^5.0.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.2.2"
+  }
 }

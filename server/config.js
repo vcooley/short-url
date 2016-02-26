@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+var config = {
   // Server port
   port: process.env.OPENSHIFT_NODEJS_PORT ||
         process.env.PORT ||
@@ -17,3 +17,9 @@ module.exports = {
     }
   }
 };
+
+if(process.env.NODE_ENV === 'test') {
+  config.mongo.uri = 'mongodb://localhost/short-url-test';
+}
+
+module.exports = config;

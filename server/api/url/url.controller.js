@@ -42,11 +42,15 @@ exports.createUrl = function(req, res) {
 };
 
 exports.retrieveUrl = function(req, res) {
+  var urlNumber = Number(req.params.shortUrl);
+  if (!urlNumber) {
+    return res.status(400).end('Invalid short URL. Should be a number.');
+  }
   Url
-    .findById(req.params.shortUrl, function(err, doc) {
+    .findById(urlNumber, function(err, doc) {
       if (err) { handleError(res, err); }
       if (!doc) {
-        return res.status(404).end('Not found.')
+        return res.status(404).end('Not found.');
       }
       if(validator.isURL(doc.url)) {
         return res.redirect(doc.url);
