@@ -1,6 +1,6 @@
 'use strict';
 
-var Counter = require('./counter.model');
+var Counter = require('./../counter/counter.model.js');
 var Url = require('./url.model');
 var validator = require('validator');
 
