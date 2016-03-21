@@ -2,14 +2,18 @@
 
 var should = require('should');
 var controller = require('./url.controller');
-var Counter = require('./counter.model.js');
+var app = require('../../app.js');
+var request = require('supertest');
+var Counter = require('./../counter/counter.model.js');
 var Url = require('./url.model.js');
 
 describe('URL controller', function() {
 
   describe('createUrl', function() {
 
-    it('should create a new URL');
+    it('should create a new URL', function(done) {
+
+    });
 
     it('should not allow the creation of an invalid URL by default');
 
