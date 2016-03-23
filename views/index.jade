@@ -3,7 +3,13 @@ html
         title="Short URL"
     body
         h3 URL Shortener
-        p Submit a request to '/api/url/new/<your-url-here>'
+        input(placeholder="Paste a long URL here.", id="url-input", type="text", style="margin-left: 5px;")
+        br
+        input(type="checkbox", id="invalid-checkbox", style="margin-top: 10px;")
+        label(for="invalid-checkbox") Invalid (Check if your input isn't a valid URL)
+        br
+        br
+        p Alternatively, you can submit a request to '/api/url/new/&lt;your-url-here&gt;'
         p A shortened URL will be created and returned to you.
         p Your URL must have a protocol attached or pass invalid=true in the query string. (i.e. '/api/url/new/google.com?invalid=true')
         p You can also pass text into the api with the 'invalid=true' flag to save it for later.
