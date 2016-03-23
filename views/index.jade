@@ -1,0 +1,9 @@
+html
+    head
+        title="Short URL"
+    body
+        h3 URL Shortener
+        p Submit a request to '/api/url/new/<your-url-here>'
+        p A shortened URL will be created and returned to you.
+        p Your URL must have a protocol attached or pass invalid=true in the query string. (i.e. '/api/url/new/google.com?invalid=true')
+        p You can also pass text into the api with the 'invalid=true' flag to save it for later.

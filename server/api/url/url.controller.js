@@ -18,7 +18,7 @@ exports.attachUrl = function(req, res, next) {
 };
 
 exports.createUrl = function(req, res) {
-  // If the url is not valid and the allowInvalid parameter has not been
+  // If the url is not valid and the invalid parameter has not been
   // passed, return a 400 error.
   var isValidUrl = validator.isURL(req.params.longUrl, {require_protocol: true});
   if(!isValidUrl && !req.query.invalid) {
@@ -38,7 +38,8 @@ exports.createUrl = function(req, res) {
       return url.save();
     })
     .then(function(doc) {
-      return res.json(doc);
+      var shortened = req.protocol + '://' + req.hostname + '/api/url/' + doc._id;
+      return res.render('created', {shortURL: shortened});
     })
     .catch(function(err) {
       return handleError(res, err);

@@ -6,7 +6,7 @@ var config = require('./config');
 
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {
-    console.log('MongoDB connection error: ' + err);
+    console.error('MongoDB connection error: ' + err);
     process.exit(-1);
   }
 );
@@ -14,7 +14,12 @@ mongoose.connection.on('error', function(err) {
 // Create app and mount routes
 var app = express();
 var server = require('http').createServer(app);
+app.set('view engine', 'jade');
+
 app.use('/api/url', require('./api/url'));
+app.use('/', function(req, res) {
+  return res.render('index');
+});
 app.use('/*', function(req, res) {
   return res.redirect('/');
 });
