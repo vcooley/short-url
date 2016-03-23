@@ -16,6 +16,9 @@ var app = express();
 var server = require('http').createServer(app);
 app.set('view engine', 'jade');
 
+app.use('/favicon.ico', function(req, res) {
+  return res.status(404).send();
+});
 app.use('/api/url', require('./api/url'));
 app.use('/', function(req, res) {
   return res.render('index');

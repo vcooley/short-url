@@ -6,13 +6,12 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "nodemon server/app.js",
+    "start": "node server/app.js",
     "test": "node test.js"
   },
   "dependencies": {
     "express": "^4.13.4",
     "jade": "^1.11.0",
-    "lodash": "^4.5.1",
     "mongoose": "^4.4.4",
     "validator": "^5.0.0"
   },
