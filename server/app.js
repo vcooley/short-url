@@ -6,7 +6,7 @@ var config = require('./config');
 
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {
-    console.error('MongoDB connection error: ' + err);
+    console.log('MongoDB connection error: ' + err);
     process.exit(-1);
   }
 );
@@ -16,7 +16,7 @@ var app = express();
 var server = require('http').createServer(app);
 app.use('/api/url', require('./api/url'));
 app.use('/*', function(req, res) {
-  res.send('Welcome')
+  return res.redirect('/');
 });
 
 server.listen(config.port, function() {
