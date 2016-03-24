@@ -58,14 +58,15 @@ exports.retrieveUrl = function(req, res) {
       if (!doc) {
         return res.status(404).end('Not found.');
       }
-      if(validator.isURL(doc.url, {require_protocol: true})) {
-        return res.redirect(doc.url);
+      var url = decodeURI(doc.url);
+      if(validator.isURL(url, {require_protocol: true})) {
+        return res.redirect(url);
       }
-      else if (validator.isURL(doc.url)) {
-        return res.redirect('//' + doc.url);
+      else if (validator.isURL(url)) {
+        return res.redirect('//' + url);
       }
       else {
-        return res.end(doc.url);
+        return res.end(url);
       }
     })
     .catch(function(err) {

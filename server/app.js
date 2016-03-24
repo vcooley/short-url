@@ -15,6 +15,7 @@ mongoose.connection.on('error', function(err) {
 var app = express();
 var server = require('http').createServer(app);
 app.set('view engine', 'jade');
+app.use(express.static('public'));
 
 app.use('/favicon.ico', function(req, res) {
   return res.status(404).send();
